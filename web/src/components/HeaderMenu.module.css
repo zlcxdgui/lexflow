@@ -1,0 +1,159 @@
+.menuButton {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.menuButton:hover:not(:disabled) {
+  border-color: var(--ui-border-strong);
+  background: color-mix(in srgb, var(--ui-surface-muted) 70%, var(--accent-2) 8%);
+}
+
+.menuButton span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 4px;
+}
+
+.menuButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in srgb, var(--bg-2) 74%, transparent);
+  backdrop-filter: blur(4px);
+  z-index: 120;
+  overscroll-behavior: contain;
+}
+
+.drawer {
+  width: 300px;
+  height: 100%;
+  border-right: 1px solid var(--ui-border);
+  background:
+    radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 94%, transparent), color-mix(in srgb, var(--bg-2) 96%, transparent)) !important;
+  box-shadow: 20px 0 40px rgba(0, 0, 0, 0.36);
+}
+
+.drawerNav {
+  display: grid;
+  gap: 4px;
+  padding: 16px 10px 10px;
+  background: transparent;
+}
+
+.drawerGroup {
+  display: grid;
+  gap: 2px;
+}
+
+.drawerLink {
+  text-decoration: none;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  transition: background-color 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.drawerLink:visited {
+  color: var(--text);
+}
+
+.drawerLink:hover {
+  background: var(--ui-surface-muted);
+  border-color: var(--ui-border);
+  transform: translateX(1px);
+}
+
+.drawerLink:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 26%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--ui-surface-inset));
+}
+
+.drawerGroupButton {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font: inherit;
+  width: 100%;
+}
+
+.drawerGroupButton:hover {
+  background: var(--ui-surface-muted);
+  border-color: var(--ui-border);
+}
+
+.groupChevron {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.drawerSubLink {
+  margin-left: 34px;
+  margin-top: 2px;
+  text-decoration: none;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 13px;
+  background: transparent;
+}
+
+.drawerSubLink:hover {
+  background: var(--ui-surface-muted);
+  border-color: var(--ui-border);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+
+@media (min-width: 1060px) {
+  .menuButton {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .drawer {
+    width: min(88vw, 320px);
+    max-width: calc(100vw - 18px);
+    box-shadow: 18px 0 34px rgba(0, 0, 0, 0.42);
+  }
+
+  .drawerNav {
+    padding-top: 14px;
+  }
+}

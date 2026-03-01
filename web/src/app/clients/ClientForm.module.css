@@ -1,0 +1,357 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  min-width: 0;
+  padding-bottom: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.linkMuted {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.linkMuted:hover {
+  color: var(--text);
+}
+
+.card {
+  margin-top: 18px;
+  border: 1px solid var(--ui-border);
+  border-radius: 18px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(520px 160px at 0% 0%, rgba(158, 240, 122, 0.04), transparent 60%),
+    radial-gradient(560px 160px at 100% 0%, rgba(89, 216, 255, 0.05), transparent 62%);
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+  transform: translateY(-1px);
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+}
+
+.row {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.input {
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.input:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.inputDisabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.primaryButton {
+  border: 1px solid rgba(108, 164, 255, 0.48);
+  background: linear-gradient(180deg, rgba(84, 135, 255, 0.42), rgba(52, 90, 180, 0.35));
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.primaryButton:hover {
+  border-color: rgba(122, 176, 255, 0.58);
+  background: linear-gradient(180deg, rgba(96, 147, 255, 0.5), rgba(60, 98, 192, 0.4));
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.14);
+}
+
+.ghostButton {
+  border: 1px solid var(--ui-border);
+  background: transparent;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.ghostButton:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 24%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface-muted));
+  transform: translateY(-1px);
+}
+
+.primaryButton:focus-visible,
+.ghostButton:focus-visible,
+.relationOption:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.error {
+  border: 1px solid color-mix(in srgb, #ef4444 36%, var(--ui-border));
+  background: color-mix(in srgb, #ef4444 10%, var(--ui-surface-muted));
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.helper {
+  color: var(--muted);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.relationGroup {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.relationItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  padding: 8px 10px;
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  font-size: 13px;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.relationBox {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  min-height: 42px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: var(--ui-surface-muted);
+  box-sizing: border-box;
+  transition:
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.relationBox:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+}
+
+.relationWrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.relationChip {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.relationChip:hover {
+  transform: translateY(-1px);
+}
+
+.relationChipActive {
+  background: linear-gradient(90deg, rgba(149, 124, 255, 0.9), rgba(162, 131, 255, 0.85));
+  border-color: rgba(215, 203, 255, 0.95);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+
+.relationRemove {
+  border: 0;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: #0d0d0d;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.relationRemove:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+.relationInput {
+  flex: 1 1 0;
+  width: 1px;
+  min-width: 1px;
+  max-width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  padding: 4px 2px;
+}
+
+.relationDropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: var(--ui-surface);
+  z-index: 20;
+  overflow: hidden;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.relationOption {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition:
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.relationOption:hover {
+  background: color-mix(in srgb, var(--accent-2) 6%, var(--ui-surface-muted));
+  transform: translateX(2px);
+}
+
+.relationOptionActive {
+  background: rgba(149, 124, 255, 0.22);
+}
+
+:global(html[data-theme='light']) .primaryButton {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--accent-2) 34%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 70%, white 12%),
+    color-mix(in srgb, var(--accent-2) 55%, #1d4ed8 10%)
+  );
+}
+
+:global(html[data-theme='light']) .primaryButton:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 46%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 76%, white 10%),
+    color-mix(in srgb, var(--accent-2) 60%, #1d4ed8 12%)
+  );
+}
+
+:global(html[data-theme='light']) .card:hover {
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}

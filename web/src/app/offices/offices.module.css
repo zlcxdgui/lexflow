@@ -1,0 +1,636 @@
+.page {
+  min-width: 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.headerTitleBlock {
+  flex: 1 1 auto;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 3.8vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 22px;
+}
+
+.linkMuted {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.linkMuted:hover {
+  color: var(--text);
+}
+
+.card {
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--accent-2) 6%, transparent), transparent 44%),
+    var(--ui-surface);
+  padding: 14px;
+  margin-bottom: 14px;
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.16);
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.sectionHeaderUi {
+  margin-bottom: 10px;
+}
+
+.sectionHeaderUi :global(h2) {
+  font-size: 18px;
+}
+
+.createRow {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+}
+
+.field span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.field input,
+.editInput {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 11px 12px;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.field input:hover,
+.editInput:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 18%, var(--ui-border));
+}
+
+.field input:focus-visible,
+.editInput:focus-visible,
+.billingSelect:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+}
+
+.item {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.item:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  background: color-mix(in srgb, var(--ui-surface) 94%, rgba(89, 216, 255, 0.04));
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+  transform: translateY(-1px);
+}
+
+.itemMain {
+  min-width: 0;
+}
+
+.nameLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 22px;
+}
+
+.meta {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.officeBillingBox {
+  margin-top: 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface-muted);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.item:hover .officeBillingBox {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+}
+
+.officeBillingHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.officeBillingMeta,
+.officeBillingUsage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.officeBillingMeta span,
+.officeBillingUsage span {
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--ui-surface);
+}
+
+.officeBillingControls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.officeRequestsBox {
+  border-top: 1px dashed var(--ui-border);
+  margin-top: 2px;
+  padding-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.officeRequestsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.officeRequestRow {
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--ui-surface);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.officeRequestRow:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  background: color-mix(in srgb, var(--ui-surface) 94%, rgba(89, 216, 255, 0.04));
+  transform: translateY(-1px);
+}
+
+.officeRequestMain {
+  min-width: 0;
+}
+
+.officeRequestTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-weight: 700;
+}
+
+.officeRequestBadge,
+.officeRequestCycle {
+  border-radius: 999px;
+  border: 1px solid var(--ui-border);
+  padding: 2px 8px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.officeRequestBadge {
+  color: #bdd2ff;
+  border-color: rgba(80, 140, 230, 0.45);
+}
+
+.officeRequestPager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px dashed var(--ui-border);
+  padding-top: 8px;
+}
+
+.officeRequestPagerMeta,
+.officeRequestPagerPage {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.officeRequestPagerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.billingSelect {
+  min-width: 220px;
+  border-radius: 11px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  color: var(--text);
+  padding: 8px 10px;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.billingSelect:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 18%, var(--ui-border));
+}
+
+.badgeActive,
+.badgeInactive,
+.badgeCurrent {
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 2px 8px;
+  border: 1px solid var(--ui-border);
+}
+
+.badgeActive {
+  color: color-mix(in srgb, #22c55e 72%, var(--text));
+  border-color: color-mix(in srgb, #22c55e 32%, var(--ui-border));
+  background: color-mix(in srgb, #22c55e 8%, var(--ui-surface-muted));
+}
+
+.badgeInactive {
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  border-color: color-mix(in srgb, #ef4444 32%, var(--ui-border));
+  background: color-mix(in srgb, #ef4444 8%, var(--ui-surface-muted));
+}
+
+.badgeCurrent {
+  color: color-mix(in srgb, var(--accent-2) 72%, var(--text));
+  border-color: color-mix(in srgb, var(--accent-2) 30%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--ui-surface-muted));
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primaryButton,
+.secondaryButton,
+.ghostButton,
+.dangerButton {
+  border-radius: 11px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.primaryButton {
+  background: linear-gradient(180deg, rgba(84, 135, 255, 0.42), rgba(52, 90, 180, 0.35));
+  border-color: rgba(108, 164, 255, 0.48);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dangerButton {
+  color: color-mix(in srgb, #ef4444 70%, var(--text));
+  border-color: color-mix(in srgb, #ef4444 40%, var(--ui-border));
+}
+
+.primaryButton:hover,
+.secondaryButton:hover,
+.ghostButton:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 24%, var(--ui-border));
+}
+
+.secondaryButton:hover,
+.ghostButton:hover {
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface-muted));
+}
+
+.primaryButton:hover {
+  border-color: rgba(122, 176, 255, 0.58);
+  background: linear-gradient(180deg, rgba(96, 147, 255, 0.5), rgba(60, 98, 192, 0.4));
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 10px 20px rgba(0, 0, 0, 0.14);
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.ghostButton:focus-visible,
+.dangerButton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.dangerButton:hover {
+  border-color: color-mix(in srgb, #ef4444 46%, var(--ui-border));
+  background: color-mix(in srgb, #ef4444 8%, var(--ui-surface-muted));
+  transform: translateY(-1px);
+}
+
+.secondaryButton:hover,
+.ghostButton:hover {
+  transform: translateY(-1px);
+}
+
+.editRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.error,
+.success {
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  border: 1px solid;
+}
+
+.error {
+  background: color-mix(in srgb, #ef4444 10%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, #ef4444 36%, var(--ui-border));
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+}
+
+.success {
+  background: color-mix(in srgb, #22c55e 10%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, #22c55e 34%, var(--ui-border));
+  color: color-mix(in srgb, #22c55e 72%, var(--text));
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  padding: 16px;
+}
+
+.modal {
+  width: min(560px, 100%);
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  background: var(--ui-surface);
+  padding: 16px;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.modalTitle {
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.modalText {
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .createRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .item {
+    flex-direction: column;
+  }
+
+  .actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .officeBillingControls {
+    align-items: stretch;
+  }
+
+  .billingSelect {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .officeRequestRow {
+    flex-direction: column;
+  }
+}
+
+:global(html[data-theme='light']) .card,
+:global(html[data-theme='light']) .item,
+:global(html[data-theme='light']) .officeBillingBox,
+:global(html[data-theme='light']) .officeRequestRow,
+:global(html[data-theme='light']) .modal {
+  border-color: var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+:global(html[data-theme='light']) .card:hover {
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+:global(html[data-theme='light']) .item:hover {
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.07);
+}
+
+:global(html[data-theme='light']) .field input,
+:global(html[data-theme='light']) .editInput,
+:global(html[data-theme='light']) .billingSelect {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .officeBillingMeta span,
+:global(html[data-theme='light']) .officeBillingUsage span,
+:global(html[data-theme='light']) .officeRequestBadge,
+:global(html[data-theme='light']) .officeRequestCycle {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+}
+
+:global(html[data-theme='light']) .officeRequestBadge {
+  color: color-mix(in srgb, var(--accent-2) 78%, #1d4ed8 20%);
+  border-color: color-mix(in srgb, var(--accent-2) 28%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--ui-surface-muted));
+}
+
+:global(html[data-theme='light']) .badgeActive {
+  color: #166534;
+  border-color: rgba(80, 190, 110, 0.32);
+  background: rgba(80, 190, 110, 0.08);
+}
+
+:global(html[data-theme='light']) .badgeInactive {
+  color: #991b1b;
+  border-color: rgba(220, 90, 90, 0.32);
+  background: rgba(220, 90, 90, 0.08);
+}
+
+:global(html[data-theme='light']) .badgeCurrent {
+  color: color-mix(in srgb, var(--accent-2) 78%, #1d4ed8 20%);
+  border-color: color-mix(in srgb, var(--accent-2) 28%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--ui-surface-muted));
+}
+
+:global(html[data-theme='light']) .officeRequestsBox,
+:global(html[data-theme='light']) .officeRequestPager {
+  border-top-color: var(--ui-border);
+}
+
+:global(html[data-theme='light']) .primaryButton,
+:global(html[data-theme='light']) .secondaryButton,
+:global(html[data-theme='light']) .ghostButton,
+:global(html[data-theme='light']) .dangerButton {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .primaryButton {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 70%, white 12%),
+    color-mix(in srgb, var(--accent-2) 55%, #1d4ed8 10%)
+  );
+  border-color: color-mix(in srgb, var(--accent-2) 34%, var(--ui-border));
+  color: #fff;
+}
+
+:global(html[data-theme='light']) .primaryButton:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 46%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 76%, white 10%),
+    color-mix(in srgb, var(--accent-2) 60%, #1d4ed8 12%)
+  );
+}
+
+:global(html[data-theme='light']) .dangerButton {
+  color: #991b1b;
+  border-color: rgba(180, 65, 65, 0.35);
+  background: rgba(220, 90, 90, 0.06);
+}
+
+:global(html[data-theme='light']) .error {
+  background: rgba(220, 90, 90, 0.08);
+  border-color: rgba(220, 90, 90, 0.32);
+  color: #991b1b;
+}
+
+:global(html[data-theme='light']) .success {
+  background: rgba(80, 190, 110, 0.08);
+  border-color: rgba(80, 190, 110, 0.32);
+  color: #166534;
+}
+
+:global(html[data-theme='light']) .modalOverlay {
+  background: rgba(15, 23, 42, 0.24);
+}

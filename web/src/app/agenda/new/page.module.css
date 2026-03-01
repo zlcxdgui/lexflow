@@ -1,0 +1,25 @@
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  min-width: 0;
+  padding-bottom: 26px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+.backLink {
+  color: var(--muted);
+  text-decoration: none;
+  margin-top: 12px;
+  transition: color 140ms ease;
+}
+
+.backLink:hover {
+  color: var(--text);
+}

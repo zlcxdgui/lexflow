@@ -1,0 +1,23 @@
+{
+  "name": "lexflow",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,blue \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run start:dev -w api",
+    "dev:web": "npm run dev -w web",
+    "build": "npm run build -w api && npm run build -w web",
+    "lint": "npm run lint -w api && npm run lint -w web",
+    "test": "npm run test -w api -- --runInBand",
+    "test:web": "npm run test -w web",
+    "test:cov:api": "npm run test:cov -w api -- --runInBand",
+    "ci:quality": "npm run lint && npm run test",
+    "ci:quality:full": "npm run ci:quality && npm run test:web"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

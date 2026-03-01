@@ -1,0 +1,13 @@
+import { Module } from '@nestjs/common';
+import { AuditModule } from '../audit/audit.module';
+import { BillingController } from './billing.controller';
+import { BillingService } from './billing.service';
+import { BillingWebhookController } from './billing.webhook.controller';
+
+@Module({
+  imports: [AuditModule],
+  controllers: [BillingController, BillingWebhookController],
+  providers: [BillingService],
+  exports: [BillingService],
+})
+export class BillingModule {}

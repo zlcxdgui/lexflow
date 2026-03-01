@@ -1,0 +1,412 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  border-bottom: 1px solid var(--ui-border);
+  background: color-mix(in srgb, var(--bg-2) 78%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  min-height: 64px;
+  padding: 10px 16px;
+  display: grid;
+  grid-template-columns: auto minmax(220px, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.zoneLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.zoneCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.zoneRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.brand {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.systemName {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.topSearch {
+  width: min(100%, 460px);
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 11px;
+  cursor: default;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.topSearchIcon {
+  display: inline-flex;
+  color: var(--muted);
+}
+
+.topSearchPlaceholder {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  flex: 1;
+}
+
+.topSearchKey {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-inset);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tenantWrap {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 8px;
+  margin-right: 2px;
+  border-right: 1px solid var(--ui-border);
+}
+
+.tenantSwitcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tenantLabel {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.tenantSelect {
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 7px 12px;
+  font-weight: 700;
+  min-width: 180px;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.tenantSingle {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iconStack {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.iconButton:hover {
+  background: color-mix(in srgb, var(--ui-surface-muted) 60%, var(--accent-2) 10%);
+  border-color: color-mix(in srgb, var(--accent-2) 24%, var(--ui-border));
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--text) 6%, transparent),
+    0 8px 14px rgba(0, 0, 0, 0.12);
+}
+
+.iconButton:active {
+  transform: translateY(0);
+}
+
+.iconButton:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.iconBadge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, #ef4444 72%, #7f1d1d 28%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--bg-2) 55%, transparent);
+}
+
+.userCard {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 14px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+}
+
+.userAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-border-strong);
+  background:
+    radial-gradient(circle at 30% 25%, rgba(104, 173, 255, 0.3), transparent 60%),
+    color-mix(in srgb, var(--ui-surface-inset) 80%, transparent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.userInfoCompact {
+  line-height: 1.1;
+  text-align: left;
+}
+
+.email {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pill {
+  margin-top: 3px;
+  display: inline-block;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-border);
+  color: var(--muted);
+  background: var(--ui-surface-inset);
+}
+
+.button {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+.button:hover {
+  background: color-mix(in srgb, var(--ui-surface) 65%, var(--accent-2) 8%);
+  border-color: var(--ui-border-strong);
+}
+
+.logoutForm {
+  margin: 0;
+}
+
+@media (min-width: 1060px) {
+  .header[data-has-sidebar='true'] .inner {
+    max-width: none;
+    margin: 0;
+    padding-left: calc(248px + 16px);
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .tenantLabel {
+    display: none;
+  }
+
+  .tenantSelect {
+    min-width: 140px;
+  }
+
+  .tenantSingle {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .inner {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .zoneCenter {
+    justify-content: flex-start;
+  }
+
+  .topSearch {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .systemName {
+    font-size: 17px;
+  }
+
+  .zoneCenter {
+    display: none;
+  }
+
+  .inner {
+    grid-template-columns: auto 1fr;
+  }
+
+  .zoneRight {
+    gap: 6px;
+  }
+
+  .tenantWrap {
+    border-right: none;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  .tenantSelect {
+    min-width: 120px;
+  }
+}
+
+@media (max-width: 700px) {
+  .tenantWrap {
+    max-width: 132px;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .tenantSelect {
+    max-width: 130px;
+    min-width: 0;
+    width: 130px;
+  }
+
+  .userCard {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .userAvatar {
+    display: none;
+  }
+
+  .userInfoCompact {
+    display: none;
+  }
+
+  .tenantSingle {
+    max-width: 90px;
+  }
+}
+
+@media (max-width: 560px) {
+  .inner {
+    min-height: 58px;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .brand {
+    display: none;
+  }
+
+  .zoneRight {
+    gap: 4px;
+  }
+
+  .iconButton {
+    width: 34px;
+    height: 34px;
+  }
+
+  .button {
+    min-height: 34px;
+    padding: 0 10px;
+    border-radius: 10px;
+  }
+
+  .tenantSelect {
+    min-width: 148px;
+    width: 148px;
+    max-width: 148px;
+    padding: 6px 8px;
+  }
+
+  .tenantWrap {
+    max-width: 150px;
+  }
+}

@@ -1,0 +1,1063 @@
+.page {
+  min-width: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(32px, 3.5vw, 42px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+}
+
+.subtitle {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+.linkMuted {
+  color: var(--muted);
+  text-decoration: none;
+  margin-top: 12px;
+  transition: color 140ms ease;
+}
+
+.linkMuted:hover {
+  color: var(--text);
+}
+
+.controlsCard,
+.summaryCard {
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  padding: 14px;
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--accent-2) 8%, transparent), transparent 45%),
+    var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.controlsCard:hover,
+.summaryCard:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+  transform: translateY(-1px);
+}
+
+.topControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.viewSwitch {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.switchBtn,
+.navBtn {
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  background: var(--ui-surface-muted);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.switchBtn:hover,
+.navBtn:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface-muted));
+  transform: translateY(-1px);
+}
+
+.navBtnDisabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.switchActive {
+  border-color: color-mix(in srgb, var(--accent-2) 40%, var(--ui-border));
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent-2) 9%, var(--ui-surface-inset));
+}
+
+.periodNav {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.periodLabel {
+  min-width: 220px;
+  text-align: center;
+  color: var(--text);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.filtersGrid {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.4fr) repeat(5, minmax(0, 1fr)) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.filtersMainRow {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.5fr) repeat(3, minmax(160px, 1fr)) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.filtersAdvancedRow {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 10px;
+  align-items: end;
+}
+
+.filtersActions {
+  display: inline-flex;
+  gap: 8px;
+  align-items: end;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field span {
+  color: #b6bdca;
+  font-size: 12px;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 10px 12px;
+  min-height: 42px;
+  line-height: 1.2;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.input:hover,
+.v2Search:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+}
+
+.input:focus-visible,
+.v2Search:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.submitBtn {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface);
+  color: var(--text);
+  padding: 10px 12px;
+  min-height: 42px;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.submitBtn:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface));
+  transform: translateY(-1px);
+}
+
+.v2Bar {
+  margin-top: 10px;
+  border-top: 1px solid var(--ui-border);
+  padding-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.viewsBar {
+  margin-top: 10px;
+  border-top: 1px solid var(--ui-border);
+  padding-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.viewsLeft,
+.viewsRight {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) auto auto auto auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.viewsRight {
+  grid-template-columns: minmax(220px, 320px) auto minmax(220px, 320px) auto;
+}
+
+.errorInline {
+  color: #ffb4b4;
+  font-size: 12px;
+}
+
+.successInline {
+  color: #b8f2c2;
+  font-size: 12px;
+}
+
+.v2SearchForm {
+  display: block;
+}
+
+.v2Search {
+  width: 100%;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 9px 10px;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.v2Chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.v2Chip {
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  padding: 5px 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.v2Chip:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  transform: translateY(-1px);
+}
+
+.v2ChipActive {
+  border-color: color-mix(in srgb, var(--accent-2) 40%, var(--ui-border));
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-inset));
+}
+
+.alertsRow {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.errorBox {
+  border: 1px solid rgba(210, 74, 74, 0.7);
+  color: #ffb4b4;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(80, 18, 18, 0.32);
+}
+
+.alertCard {
+  border-radius: 14px;
+  border: 1px solid;
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.alertCard:hover {
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.alertCard span {
+  font-size: 12px;
+  color: #b6bdca;
+}
+
+.alertCard strong {
+  font-size: 28px;
+}
+
+.alertLate {
+  border-color: rgba(255, 107, 107, 0.45);
+}
+
+.alertToday {
+  border-color: rgba(255, 208, 99, 0.45);
+}
+
+.alertNext {
+  border-color: rgba(106, 168, 255, 0.45);
+}
+
+.calendarMonth {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  align-items: start;
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  padding: 10px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.calendarMonth:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+}
+
+.monthWeekdays {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.monthWeekdayItem {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 8px 10px;
+  border: 1px solid var(--ui-border);
+  border-radius: 10px;
+  background: var(--ui-surface-muted);
+  text-align: center;
+}
+
+.dayCell,
+.weekDayCard {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  min-height: 130px;
+  background: var(--ui-surface);
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease,
+    transform 140ms ease;
+}
+
+.dayCell {
+  min-height: 112px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text) 2%, transparent);
+}
+
+.dayCell:hover,
+.weekDayCard:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  transform: translateY(-1px);
+}
+
+.dayCellToday {
+  border-color: rgba(106, 168, 255, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(106, 168, 255, 0.2);
+}
+
+.dayHeaderMonth {
+  border-bottom: 1px solid var(--ui-border);
+  padding: 7px 8px 6px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 6px;
+}
+
+.dayHeaderMonthWeekday {
+  color: var(--muted-2);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+.dayHeaderMonthNumber {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dayHeaderMonthBadge {
+  border: 1px solid rgba(106, 168, 255, 0.5);
+  background: rgba(106, 168, 255, 0.14);
+  color: #d8e9ff;
+  border-radius: 999px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.dayHeader,
+.weekDayHeader {
+  border-bottom: 1px solid var(--ui-border);
+  padding: 8px 10px;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: capitalize;
+}
+
+.dayBody {
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.dayBodyMonth {
+  padding: 7px;
+  display: grid;
+  align-content: start;
+  gap: 5px;
+}
+
+.empty {
+  color: #7d8595;
+  font-size: 12px;
+}
+
+.emptyMonth {
+  color: #5f6777;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.emptyMonthDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(122, 132, 149, 0.45);
+  margin-top: 4px;
+  margin-left: 2px;
+}
+
+.eventPill {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.eventPillMonth {
+  padding: 3px 7px;
+  font-size: 11px;
+  line-height: 1.15;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.eventLink:hover .eventPillMonth {
+  background: color-mix(in srgb, var(--accent-2) 5%, rgba(255, 255, 255, 0.02));
+}
+
+.eventPillPrefix {
+  display: inline-block;
+  min-width: 12px;
+  font-weight: 800;
+  margin-right: 4px;
+  padding: 1px 4px;
+  border-radius: 999px;
+  font-size: 10px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.eventTypeAppointment {
+  background-color: rgba(68, 161, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(68, 161, 255, 0.12);
+}
+
+.eventPillPrefix.eventTypeAppointment {
+  background: rgba(68, 161, 255, 0.22);
+  color: #cfe7ff;
+}
+
+.eventTypeTask {
+  background-color: rgba(126, 94, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(126, 94, 255, 0.12);
+}
+
+.eventPillPrefix.eventTypeTask {
+  background: rgba(126, 94, 255, 0.22);
+  color: #e0d4ff;
+}
+
+.eventTypeDeadline {
+  background-color: rgba(255, 180, 74, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 180, 74, 0.12);
+}
+
+.eventPillPrefix.eventTypeDeadline {
+  background: rgba(255, 180, 74, 0.2);
+  color: #ffe2b2;
+}
+
+.monthMore {
+  color: #8f98aa;
+  font-size: 10px;
+  padding: 1px 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.eventLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.eventPending {
+  border: 1px solid #3a73c6;
+  color: #cfe3ff;
+}
+
+.eventDone {
+  border: 1px solid #4f6e50;
+  color: #d4f6d5;
+  opacity: 0.92;
+}
+
+.eventLate {
+  border: 1px solid #8f4a4a;
+  color: #ffd6d6;
+}
+
+.weekList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.weekDayEvents {
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.weekEventRow {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 8px;
+  align-items: start;
+}
+
+.weekEventLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+}
+
+.dotPending {
+  background: #6aa8ff;
+}
+
+.dotDone {
+  background: #69d070;
+}
+
+.dotLate {
+  background: #ff7a7a;
+}
+
+.eventTitle {
+  font-weight: 700;
+}
+
+.eventMeta {
+  font-size: 12px;
+  color: #a7afbe;
+}
+
+.summaryHeader {
+  margin-bottom: 10px;
+}
+
+.summaryHeader :global(h2) {
+  font-size: 20px;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.summaryGrid div {
+  border: 1px solid #2a2f3a;
+  border-radius: 10px;
+  padding: 10px;
+  display: grid;
+  gap: 4px;
+}
+
+.summaryGrid span {
+  font-size: 12px;
+  color: #b6bdca;
+}
+
+.summaryGrid strong {
+  font-size: 24px;
+}
+
+.quickList {
+  margin-top: 0;
+}
+
+.quickListItem {
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition:
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.quickListItem:hover {
+  background: color-mix(in srgb, var(--accent-2) 4%, var(--ui-surface));
+  transform: translateY(-1px);
+}
+
+.quickRow,
+.quickLink {
+  text-decoration: none;
+  color: inherit;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+}
+
+.quickDateBlock {
+  display: grid;
+  align-content: center;
+  gap: 2px;
+}
+
+.quickDate {
+  color: #b9c2d1;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.quickTime {
+  color: #8f98aa;
+  font-size: 11px;
+  line-height: 1.1;
+}
+
+.quickMain {
+  min-width: 0;
+}
+
+.quickTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.quickTypeChip {
+  border: 1px solid #2a2f3a;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 11px;
+  line-height: 1.1;
+  color: #c7cfdd;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.quickTypeTask {
+  border-color: rgba(114, 157, 255, 0.45);
+  color: #d3e4ff;
+  background: rgba(90, 140, 255, 0.08);
+}
+
+.quickTypeDeadline {
+  border-color: rgba(255, 191, 97, 0.42);
+  color: #ffe2b2;
+  background: rgba(255, 170, 60, 0.08);
+}
+
+.quickEventTitle {
+  font-size: 14px;
+  line-height: 1.25;
+  color: #eef3ff;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.quickMetaCol {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.quickStatusChip {
+  color: #d1d8e5;
+  font-size: 12px;
+  border: 1px solid #2f3644;
+  border-radius: 999px;
+  padding: 4px 9px;
+  white-space: nowrap;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.quickStatus {
+  color: #b9c2d1;
+  font-size: 12px;
+}
+
+.eventsPagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .filtersGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .filtersMainRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filtersAdvancedRow {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .summaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendarMonth {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .monthWeekdays {
+    display: none;
+  }
+
+  .dayCell {
+    min-height: 100px;
+  }
+
+  .dayHeaderMonthNumber {
+    font-size: 15px;
+  }
+
+  .viewsLeft {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .viewsRight {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .quickRow,
+  .quickLink {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .quickDateBlock {
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quickMetaCol {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 680px) {
+  .filtersGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filtersMainRow,
+  .filtersAdvancedRow {
+    grid-template-columns: 1fr;
+  }
+
+  .filtersActions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .alertsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .headerRow,
+  .topControls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .periodLabel {
+    min-width: 0;
+  }
+
+  .v2SearchForm { display: block; }
+
+  .viewsLeft,
+  .viewsRight {
+    grid-template-columns: 1fr;
+  }
+}
+
+:global(html[data-theme='light']) .controlsCard,
+:global(html[data-theme='light']) .summaryCard {
+  border-color: var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+:global(html[data-theme='light']) .controlsCard:hover,
+:global(html[data-theme='light']) .summaryCard:hover {
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+:global(html[data-theme='light']) .subtitle,
+:global(html[data-theme='light']) .linkMuted,
+:global(html[data-theme='light']) .field span,
+:global(html[data-theme='light']) .alertCard span,
+:global(html[data-theme='light']) .periodLabel,
+:global(html[data-theme='light']) .eventMeta,
+:global(html[data-theme='light']) .quickDate,
+:global(html[data-theme='light']) .quickTime,
+:global(html[data-theme='light']) .eventsPaginationInfo,
+:global(html[data-theme='light']) .requestPagerMeta {
+  color: var(--muted);
+}
+
+:global(html[data-theme='light']) .input,
+:global(html[data-theme='light']) .v2Search {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .submitBtn,
+:global(html[data-theme='light']) .switchBtn,
+:global(html[data-theme='light']) .navBtn,
+:global(html[data-theme='light']) .v2Chip {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .switchActive,
+:global(html[data-theme='light']) .v2ChipActive {
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-inset));
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .calendarMonth,
+:global(html[data-theme='light']) .dayCell,
+:global(html[data-theme='light']) .weekDayCard,
+:global(html[data-theme='light']) .quickListItem,
+:global(html[data-theme='light']) .summaryGrid div {
+  border-color: var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: none;
+}
+
+:global(html[data-theme='light']) .alertCard:hover {
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
+}
+
+:global(html[data-theme='light']) .monthWeekdayItem,
+:global(html[data-theme='light']) .dayHeaderMonth,
+:global(html[data-theme='light']) .dayHeader,
+:global(html[data-theme='light']) .weekDayHeader {
+  border-color: var(--ui-border);
+  background: transparent;
+  color: var(--muted);
+}
+
+:global(html[data-theme='light']) .dayHeaderMonthNumber,
+:global(html[data-theme='light']) .quickEventTitle {
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .empty,
+:global(html[data-theme='light']) .emptyMonth,
+:global(html[data-theme='light']) .monthMore {
+  color: var(--muted-2);
+}
+
+:global(html[data-theme='light']) .quickTypeChip,
+:global(html[data-theme='light']) .quickStatusChip,
+:global(html[data-theme='light']) .requestBadge,
+:global(html[data-theme='light']) .requestCycle {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--muted);
+}
+
+:global(html[data-theme='light']) .quickTypeTask {
+  border-color: color-mix(in srgb, var(--accent-2) 30%, var(--ui-border));
+  color: color-mix(in srgb, var(--accent-2) 78%, #1d4ed8 20%);
+  background: color-mix(in srgb, var(--accent-2) 8%, var(--ui-surface-muted));
+}
+
+:global(html[data-theme='light']) .quickTypeDeadline {
+  border-color: rgba(217, 146, 40, 0.28);
+  color: #8a5a10;
+  background: rgba(245, 177, 67, 0.08);
+}
+
+:global(html[data-theme='light']) .alertLate {
+  border-color: rgba(220, 90, 90, 0.28);
+}
+
+:global(html[data-theme='light']) .alertToday {
+  border-color: rgba(217, 146, 40, 0.28);
+}
+
+:global(html[data-theme='light']) .alertNext {
+  border-color: color-mix(in srgb, var(--accent-2) 30%, var(--ui-border));
+}
+
+:global(html[data-theme='light']) .dayHeaderMonthBadge {
+  border-color: color-mix(in srgb, var(--accent-2) 35%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 12%, var(--ui-surface-muted));
+  color: color-mix(in srgb, var(--accent-2) 78%, #1d4ed8 18%);
+}
+
+:global(html[data-theme='light']) .eventPending {
+  border-color: color-mix(in srgb, var(--accent-2) 42%, var(--ui-border));
+  color: color-mix(in srgb, var(--accent-2) 86%, #1d4ed8 16%);
+  background: color-mix(in srgb, var(--accent-2) 7%, var(--ui-surface));
+}
+
+:global(html[data-theme='light']) .eventDone {
+  border-color: rgba(58, 170, 105, 0.28);
+  color: #166534;
+  background: rgba(58, 170, 105, 0.06);
+}
+
+:global(html[data-theme='light']) .eventLate {
+  border-color: rgba(220, 90, 90, 0.28);
+  color: #991b1b;
+  background: rgba(220, 90, 90, 0.06);
+}
+
+:global(html[data-theme='light']) .eventTypeAppointment {
+  background-color: color-mix(in srgb, var(--accent-2) 6%, var(--ui-surface));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-2) 14%, transparent);
+}
+
+:global(html[data-theme='light']) .eventPillPrefix.eventTypeAppointment {
+  background: color-mix(in srgb, var(--accent-2) 14%, var(--ui-surface-muted));
+  color: color-mix(in srgb, var(--accent-2) 82%, #1d4ed8 18%);
+}
+
+:global(html[data-theme='light']) .eventTypeTask {
+  background-color: rgba(126, 94, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(126, 94, 255, 0.1);
+}
+
+:global(html[data-theme='light']) .eventPillPrefix.eventTypeTask {
+  background: rgba(126, 94, 255, 0.12);
+  color: #5b37b3;
+}
+
+:global(html[data-theme='light']) .eventTypeDeadline {
+  background-color: rgba(245, 177, 67, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(245, 177, 67, 0.12);
+}
+
+:global(html[data-theme='light']) .eventPillPrefix.eventTypeDeadline {
+  background: rgba(245, 177, 67, 0.14);
+  color: #8a5a10;
+}
+
+:global(html[data-theme='light']) .errorBox {
+  border-color: rgba(210, 74, 74, 0.35);
+  background: rgba(210, 74, 74, 0.08);
+  color: #991b1b;
+}

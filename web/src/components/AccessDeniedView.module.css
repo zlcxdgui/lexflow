@@ -1,0 +1,43 @@
+.wrap {
+  min-height: 52vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: min(760px, 100%);
+  border: 1px solid color-mix(in srgb, #ef4444 34%, var(--ui-border));
+  background: color-mix(in srgb, #ef4444 8%, var(--ui-surface-muted));
+  border-radius: 8px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.title {
+  margin: 0 0 10px;
+  font-size: 40px;
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  font-weight: 800;
+}
+
+.text {
+  margin: 0;
+  color: color-mix(in srgb, #ef4444 58%, var(--text));
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+.text + .text {
+  margin-top: 12px;
+}
+
+@media (max-width: 760px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .text {
+    font-size: 21px;
+  }
+}

@@ -1,0 +1,509 @@
+.card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.cardMuted {
+  background: var(--ui-surface-muted);
+}
+
+.cardInset {
+  background: var(--ui-surface-inset);
+}
+
+.cardPaddedSm {
+  padding: 12px;
+}
+
+.cardPaddedMd {
+  padding: 16px;
+}
+
+.cardPaddedLg {
+  padding: 20px;
+}
+
+.listStack {
+  display: grid;
+  gap: 8px;
+}
+
+.listEmpty {
+  border: 1px dashed var(--ui-border);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--muted);
+  background: var(--ui-surface-muted);
+}
+
+.listRow {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface-muted);
+  padding: 10px 12px;
+  box-shadow: var(--ui-shadow-soft);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.listRowMain {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.listRowActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+}
+
+.listPager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--ui-border) 78%, transparent);
+  padding-top: 8px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.listPagerMeta,
+.listPagerPage {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.listPagerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease, opacity 120ms ease;
+  cursor: pointer;
+}
+
+.buttonSm {
+  min-height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.buttonPrimary {
+  background: linear-gradient(180deg, rgba(84, 135, 255, 0.42), rgba(52, 90, 180, 0.35));
+  color: #fff;
+  border-color: rgba(108, 164, 255, 0.48);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.buttonSecondary {
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  border-color: var(--ui-border);
+}
+
+.buttonDanger {
+  background: color-mix(in srgb, #ef4444 8%, var(--ui-surface-muted));
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  border-color: color-mix(in srgb, #ef4444 32%, var(--ui-border));
+}
+
+.buttonGhost {
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  border-color: var(--ui-border);
+}
+
+.buttonPrimary:hover {
+  border-color: rgba(122, 176, 255, 0.58);
+  background: linear-gradient(180deg, rgba(96, 147, 255, 0.5), rgba(60, 98, 192, 0.4));
+}
+
+.buttonSecondary:hover,
+.buttonGhost:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 24%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface-muted));
+}
+
+.buttonDanger:hover {
+  border-color: color-mix(in srgb, #ef4444 40%, var(--ui-border));
+  background: color-mix(in srgb, #ef4444 12%, var(--ui-surface-muted));
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.selectRoot {
+  position: relative;
+  min-width: 0;
+}
+
+.selectTrigger {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selectTrigger[data-placeholder='true'] .selectTriggerText {
+  color: var(--muted);
+}
+
+.selectTrigger[data-loading='true'] {
+  cursor: progress;
+}
+
+.selectTrigger[data-loading='true'] .selectTriggerText {
+  color: var(--muted);
+}
+
+.selectTriggerText {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectChevron {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1;
+  transition: transform 120ms ease;
+  flex: 0 0 auto;
+}
+
+.selectChevronOpen {
+  transform: rotate(180deg);
+}
+
+.selectTrigger[data-loading='true'] .selectChevron {
+  animation: uiSelectSpin 900ms linear infinite;
+}
+
+.selectMenu {
+  position: fixed;
+  z-index: 1300;
+  min-width: 190px;
+  max-width: min(360px, calc(100vw - 24px));
+  max-height: min(320px, calc(100vh - 24px));
+  overflow: auto;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 6px;
+  background: color-mix(in srgb, var(--bg-2) 98%, transparent);
+  box-shadow: var(--ui-shadow-soft);
+  display: grid;
+  gap: 4px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.selectOption {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  padding: 8px 10px;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+
+.selectOption:hover {
+  background: color-mix(in srgb, var(--accent-2) 7%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  transform: translateY(-1px);
+}
+
+.selectOptionHighlighted {
+  background: color-mix(in srgb, var(--accent-2) 7%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+}
+
+.selectOptionActive {
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, var(--accent-2) 22%, var(--ui-border));
+}
+
+.selectOptionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selectOptionCheck {
+  color: color-mix(in srgb, var(--accent-2) 78%, var(--text));
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.selectTrigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.selectTrigger[data-invalid='true'] {
+  border-color: color-mix(in srgb, #ef4444 42%, var(--ui-border));
+}
+
+.selectTrigger[data-invalid='true']:hover {
+  border-color: color-mix(in srgb, #ef4444 52%, var(--ui-border));
+}
+
+.selectTrigger[data-invalid='true']:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, #ef4444 20%, transparent);
+}
+
+:global(html[data-theme='light']) .buttonSecondary {
+  background: var(--ui-surface-muted);
+  border-color: var(--ui-border);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .buttonGhost {
+  background: var(--ui-surface-muted);
+  border-color: var(--ui-border);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .buttonDanger {
+  background: rgba(220, 90, 90, 0.08);
+  border-color: rgba(220, 90, 90, 0.28);
+  color: #991b1b;
+}
+
+:global(html[data-theme='light']) .buttonPrimary {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--accent-2) 34%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 70%, white 12%),
+    color-mix(in srgb, var(--accent-2) 55%, #1d4ed8 10%)
+  );
+}
+
+:global(html[data-theme='light']) .buttonPrimary:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 46%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 76%, white 10%),
+    color-mix(in srgb, var(--accent-2) 60%, #1d4ed8 12%)
+  );
+}
+
+:global(html[data-theme='light']) .selectMenu {
+  background: color-mix(in srgb, white 98%, var(--bg));
+  border-color: var(--ui-border);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+:global(html[data-theme='light']) .selectOption:hover {
+  background: color-mix(in srgb, var(--accent-2) 6%, var(--ui-surface-muted));
+}
+
+:global(html[data-theme='light']) .selectOptionHighlighted {
+  background: color-mix(in srgb, var(--accent-2) 6%, var(--ui-surface-muted));
+}
+
+:global(html[data-theme='light']) .selectOptionActive {
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-muted));
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+}
+
+:global(html[data-theme='light']) .selectTrigger[data-invalid='true'] {
+  border-color: rgba(220, 90, 90, 0.38);
+}
+
+:global(html[data-theme='light']) .selectTrigger[data-invalid='true']:hover {
+  border-color: rgba(220, 90, 90, 0.5);
+}
+
+:global(html[data-theme='light']) .selectTrigger[data-invalid='true']:focus-visible {
+  box-shadow: 0 0 0 3px rgba(220, 90, 90, 0.14);
+}
+
+@keyframes uiSelectSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sectionTitleWrap {
+  min-width: 0;
+}
+
+.sectionEyebrow {
+  color: var(--muted-2);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.sectionTitle {
+  margin: 2px 0 0;
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.sectionDesc {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.statCard {
+  display: grid;
+  gap: 8px;
+}
+
+.statLabel {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.statValue {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.statMeta {
+  color: var(--muted-2);
+  font-size: 12px;
+}
+
+.dialogOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 6, 12, 0.58);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  z-index: 1200;
+}
+
+.dialogCard {
+  width: min(520px, calc(100vw - 24px));
+  border-radius: 16px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  padding: 16px;
+}
+
+.modalFrameCard {
+  width: min(520px, calc(100vw - 24px));
+  border-radius: 16px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  padding: 16px;
+}
+
+.modalFrameCardLg {
+  width: min(860px, calc(100vw - 24px));
+}
+
+.dialogTitle {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.dialogText {
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.dialogError {
+  margin-top: 10px;
+  border: 1px solid rgba(220, 90, 90, 0.32);
+  border-radius: 10px;
+  background: rgba(220, 90, 90, 0.1);
+  color: #ffd0d0;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+.dialogActions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+:global(html[data-theme='light']) .dialogOverlay {
+  background: rgba(15, 23, 42, 0.24);
+}
+
+:global(html[data-theme='light']) .dialogError {
+  color: #991b1b;
+}

@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16
+    container_name: lexflow_db
+    environment:
+      POSTGRES_DB: lexflow
+      POSTGRES_USER: lexflow
+      POSTGRES_PASSWORD: lexflow
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  api:
+    image: node:20
+    container_name: lexflow_api
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./api/.env.docker
+    depends_on:
+      - db
+    command: bash -lc "npm install && npm run start:dev"
+
+volumes:
+  db_data:

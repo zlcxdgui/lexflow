@@ -1,0 +1,89 @@
+.form {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.input,
+.select,
+.textarea {
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.error {
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+}
+
+.button {
+  border: 1px solid rgba(108, 164, 255, 0.48);
+  background: linear-gradient(180deg, rgba(84, 135, 255, 0.42), rgba(52, 90, 180, 0.35));
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  width: fit-content;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.button:hover:not(.buttonDisabled) {
+  border-color: rgba(122, 176, 255, 0.58);
+  background: linear-gradient(180deg, rgba(96, 147, 255, 0.5), rgba(60, 98, 192, 0.4));
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.buttonDisabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+@media (max-width: 820px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+:global(html[data-theme='light']) .button {
+  border-color: color-mix(in srgb, var(--accent-2) 34%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 70%, white 12%),
+    color-mix(in srgb, var(--accent-2) 55%, #1d4ed8 10%)
+  );
+}
+
+:global(html[data-theme='light']) .button:hover:not(.buttonDisabled) {
+  border-color: color-mix(in srgb, var(--accent-2) 46%, var(--ui-border));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-2) 76%, white 10%),
+    color-mix(in srgb, var(--accent-2) 60%, #1d4ed8 12%)
+  );
+}

@@ -1,0 +1,40 @@
+.root {
+  position: relative;
+  display: inline-flex;
+}
+
+.trigger {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--ui-border) 32%, transparent);
+  background: color-mix(in srgb, var(--ui-surface-muted) 78%, transparent);
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.trigger:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 10%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 2%, var(--ui-surface-muted));
+}
+
+.menu {
+  position: fixed;
+  background: color-mix(in srgb, var(--bg-2) 92%, transparent);
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 6px;
+  min-width: 190px;
+  max-width: min(320px, calc(100vw - 24px));
+  z-index: 90;
+  box-shadow: var(--ui-shadow-soft);
+  display: grid;
+  gap: 4px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}

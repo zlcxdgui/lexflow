@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# env
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# builds
+web/.next/
+web/out/
+api/dist/
+coverage/
+
+# uploads
+api/uploads/
+
+# logs
+*.log
+
+# misc
+tmp/
+.DS_Store

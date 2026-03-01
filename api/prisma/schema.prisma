@@ -1,0 +1,702 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String
+  timezone  String   @default("America/Manaus")
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  members   TenantMember[]
+  invites   TenantInvite[]
+  agendaViews AgendaView[]
+  clients   Client[]
+  matters   Matter[]
+  tasks     Task[]
+  deadlines Deadline[]
+  documents Document[]
+  auditLogs AuditLog[]
+  notifications Notification[]
+  codeCounters TenantCodeCounter[]
+  accessGroups TenantAccessGroup[]
+  subscriptions TenantSubscription[]
+  subscriptionUsage TenantSubscriptionUsage?
+  billingEvents BillingEvent[]
+  billingPlanChangeRequests BillingPlanChangeRequest[]
+  financeAccounts FinanceAccount[]
+  financeCategories FinanceCategory[]
+  financeCostCenters FinanceCostCenter[]
+  financeEntries FinanceEntry[]
+  financeInstallments FinanceInstallment[]
+  financeRecurrenceTemplates FinanceRecurrenceTemplate[]
+}
+
+model Plan {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  isSystem    Boolean  @default(true)
+
+  // Entitlements (v1)
+  maxUsers            Int?
+  maxMatters          Int?
+  storageLimitGb      Int?
+  reportsAdvanced     Boolean @default(false)
+  auditExport         Boolean @default(false)
+  customAccessGroups  Boolean @default(false)
+  appointmentsModule  Boolean @default(true)
+  prioritySupport     Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  subscriptions TenantSubscription[]
+  billingPlanChangeRequests BillingPlanChangeRequest[]
+}
+
+model TenantSubscription {
+  id        String   @id @default(uuid())
+  tenantId   String
+  planId     String
+  status     String   @default("TRIAL") // TRIAL | ACTIVE | PAST_DUE | CANCELED | SUSPENDED
+  billingCycle String @default("MONTHLY") // MONTHLY | YEARLY
+
+  trialEndsAt         DateTime?
+  currentPeriodStart  DateTime?
+  currentPeriodEnd    DateTime?
+  graceEndsAt         DateTime?
+  cancelAtPeriodEnd   Boolean  @default(false)
+  canceledAt          DateTime?
+
+  externalProvider    String? // stripe | asaas | mp | manual
+  externalCustomerId  String?
+  externalSubscriptionId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  plan   Plan   @relation(fields: [planId], references: [id], onDelete: Restrict)
+
+  @@index([tenantId, status])
+  @@index([planId])
+  @@index([externalProvider, externalSubscriptionId])
+  @@index([currentPeriodEnd])
+}
+
+model TenantSubscriptionUsage {
+  id        String   @id @default(uuid())
+  tenantId   String   @unique
+
+  usersCount       Int @default(0)
+  activeUsersCount Int @default(0)
+  mattersCount     Int @default(0)
+  storageBytes     BigInt @default(0)
+
+  lastRecalculatedAt DateTime?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, updatedAt])
+}
+
+model BillingEvent {
+  id        String   @id @default(uuid())
+  tenantId   String
+  provider   String
+  eventType  String
+  status     String?
+  referenceId String?
+  payloadJson String?
+  processedAt DateTime?
+  createdAt   DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, createdAt])
+  @@index([provider, eventType])
+  @@index([referenceId])
+}
+
+model BillingPlanChangeRequest {
+  id        String   @id @default(uuid())
+  tenantId  String
+  requestedPlanId String
+  requestedBillingCycle String @default("MONTHLY") // MONTHLY | YEARLY
+  status    String   @default("PENDING") // PENDING | APPROVED | REJECTED | CANCELED
+  notes     String?
+
+  requestedByUserId String?
+  requestedByEmail  String?
+
+  reviewedByUserId String?
+  reviewedByEmail  String?
+  reviewedAt DateTime?
+  resolutionNotes String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  requestedPlan Plan @relation(fields: [requestedPlanId], references: [id], onDelete: Restrict)
+
+  @@index([tenantId, status, createdAt])
+  @@index([requestedPlanId])
+  @@index([requestedByUserId])
+  @@index([reviewedByUserId])
+}
+
+model FinanceAccount {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  name      String
+  type      String   @default("BANK") // CASH | BANK | DIGITAL
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  entries              FinanceEntry[]       @relation("FinanceEntryDefaultAccount")
+  installmentPayments  FinanceInstallment[] @relation("FinanceInstallmentAccount")
+  recurrenceTemplates  FinanceRecurrenceTemplate[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, isActive])
+}
+
+model FinanceCategory {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  name      String
+  kind      String   @default("BOTH") // RECEIVABLE | PAYABLE | BOTH
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  entries             FinanceEntry[]
+  recurrenceTemplates FinanceRecurrenceTemplate[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, isActive, kind])
+}
+
+model FinanceCostCenter {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  entries             FinanceEntry[]
+  recurrenceTemplates FinanceRecurrenceTemplate[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, isActive])
+}
+
+model FinanceRecurrenceTemplate {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  name      String
+  isActive  Boolean  @default(true)
+  direction String   // IN | OUT
+  description String
+  notes     String?
+  clientId  String?
+  matterId  String?
+  categoryId String
+  costCenterId String
+  accountId String
+  amountCents Int
+  frequency String   @default("MONTHLY") // MONTHLY | WEEKLY | YEARLY
+  installmentsPerGeneration Int @default(1)
+  dayOfMonth Int?
+  startDate DateTime
+  endDate   DateTime?
+  lastGeneratedCompetenceDate DateTime?
+  createdByUserId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  matter Matter? @relation(fields: [matterId], references: [id], onDelete: SetNull)
+  category FinanceCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  costCenter FinanceCostCenter @relation(fields: [costCenterId], references: [id], onDelete: Restrict)
+  account FinanceAccount @relation(fields: [accountId], references: [id], onDelete: Restrict)
+  createdBy User @relation("FinanceRecurrenceTemplateCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+
+  generatedEntries FinanceEntry[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, isActive, frequency])
+  @@index([matterId])
+  @@index([clientId])
+}
+
+model FinanceEntry {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  direction String   // IN | OUT
+  status    String   @default("OPEN") // OPEN | PARTIAL | SETTLED | OVERDUE | CANCELED
+  description String
+  notes     String?
+  clientId  String?
+  matterId  String?
+  categoryId String
+  costCenterId String
+  accountId String
+  issueDate DateTime
+  competenceDate DateTime?
+  totalAmountCents Int
+  installmentsCount Int @default(1)
+  origin    String   @default("MANUAL") // MANUAL | RECURRENCE
+  recurrenceTemplateId String?
+  createdByUserId String
+  canceledAt DateTime?
+  canceledByUserId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  matter Matter? @relation(fields: [matterId], references: [id], onDelete: SetNull)
+  category FinanceCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  costCenter FinanceCostCenter @relation(fields: [costCenterId], references: [id], onDelete: Restrict)
+  account FinanceAccount @relation("FinanceEntryDefaultAccount", fields: [accountId], references: [id], onDelete: Restrict)
+  recurrenceTemplate FinanceRecurrenceTemplate? @relation(fields: [recurrenceTemplateId], references: [id], onDelete: SetNull)
+  createdBy User @relation("FinanceEntryCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+  canceledBy User? @relation("FinanceEntryCanceledBy", fields: [canceledByUserId], references: [id], onDelete: SetNull)
+
+  installments FinanceInstallment[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId, direction, status])
+  @@index([tenantId, matterId])
+  @@index([tenantId, clientId])
+  @@index([tenantId, issueDate])
+  @@index([tenantId, createdAt])
+}
+
+model FinanceInstallment {
+  id        String   @id @default(uuid())
+  tenantId  String
+  entryId   String
+  number    Int
+  description String?
+  dueDate   DateTime
+  amountCents Int
+  discountCents Int @default(0)
+  interestCents Int @default(0)
+  fineCents Int @default(0)
+  paidAmountCents Int?
+  paidAt    DateTime?
+  accountId String?
+  paymentMethod String? // CASH | PIX | BANK_TRANSFER | CARD | OTHER
+  status    String   @default("OPEN") // OPEN | SETTLED | OVERDUE | CANCELED
+  settledByUserId String?
+  canceledAt DateTime?
+  canceledByUserId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  entry FinanceEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  account FinanceAccount? @relation("FinanceInstallmentAccount", fields: [accountId], references: [id], onDelete: SetNull)
+  settledBy User? @relation("FinanceInstallmentSettledBy", fields: [settledByUserId], references: [id], onDelete: SetNull)
+  canceledBy User? @relation("FinanceInstallmentCanceledBy", fields: [canceledByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([entryId, number])
+  @@index([tenantId, status, dueDate])
+  @@index([tenantId, paidAt])
+  @@index([tenantId, entryId])
+  @@index([tenantId, accountId])
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  isPlatformAdmin Boolean @default(false)
+  failedLoginAttempts Int @default(0)
+  lockedUntil DateTime?
+  passwordChangedAt DateTime @default(now())
+  passwordExpiresAt DateTime?
+  twoFactorEnabled Boolean @default(false)
+  twoFactorSecret String?
+  createdAt DateTime @default(now())
+
+  memberships       TenantMember[]
+  matterMemberships MatterMember[]
+
+  createdTasks  Task[] @relation("TaskCreatedBy")
+  assignedTasks Task[] @relation("TaskAssignedTo")
+
+  uploadedDocuments Document[]
+  auditLogs         AuditLog[]
+  sentInvites       TenantInvite[] @relation("InviteCreatedBy")
+  acceptedInvites   TenantInvite[] @relation("InviteAcceptedBy")
+  agendaViews       AgendaView[]
+  notifications     Notification[] @relation("NotificationRecipient")
+  authSessions      AuthSession[]
+  createdFinanceEntries FinanceEntry[] @relation("FinanceEntryCreatedBy")
+  canceledFinanceEntries FinanceEntry[] @relation("FinanceEntryCanceledBy")
+  settledFinanceInstallments FinanceInstallment[] @relation("FinanceInstallmentSettledBy")
+  canceledFinanceInstallments FinanceInstallment[] @relation("FinanceInstallmentCanceledBy")
+  createdFinanceRecurrenceTemplates FinanceRecurrenceTemplate[] @relation("FinanceRecurrenceTemplateCreatedBy")
+}
+
+model Notification {
+  id              String   @id @default(uuid())
+  tenantId        String
+  recipientUserId String
+  kind            String
+  title           String
+  subtitle        String?
+  href            String
+  dataJson        String?
+  isRead          Boolean  @default(false)
+  readAt          DateTime?
+  createdAt       DateTime @default(now())
+
+  tenant    Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  recipient User   @relation("NotificationRecipient", fields: [recipientUserId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, recipientUserId, isRead])
+  @@index([tenantId, createdAt])
+}
+
+model AgendaView {
+  id          String   @id @default(uuid())
+  tenantId    String
+  userId      String
+  name        String
+  filtersJson String
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId, userId])
+}
+
+model TenantMember {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  userId    String
+  employeeClientId String?
+  role      String
+  isActive  Boolean  @default(true)
+  settingsJson String?
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, userId])
+  @@unique([tenantId, employeeClientId])
+  @@unique([tenantId, code])
+  @@index([tenantId])
+  @@index([userId])
+}
+
+model TenantInvite {
+  id               String    @id @default(uuid())
+  tenantId         String
+  invitedByUserId  String
+  invitedEmail     String
+  inviteEmployeeClientId String?
+  role             String
+  inviteSettingsJson String?
+  tokenHash        String    @unique
+  status           String    @default("PENDING")
+  expiresAt        DateTime
+  acceptedAt       DateTime?
+  acceptedByUserId String?
+  createdAt        DateTime  @default(now())
+
+  tenant     Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  invitedBy  User    @relation("InviteCreatedBy", fields: [invitedByUserId], references: [id], onDelete: Cascade)
+  acceptedBy User?   @relation("InviteAcceptedBy", fields: [acceptedByUserId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([tenantId, inviteEmployeeClientId])
+  @@index([invitedEmail])
+  @@index([status])
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  code      Int
+  tenantId  String
+  type      String
+  name      String
+  cpf       String?
+  rg        String?
+  cnpj      String?
+  razaoSocial   String?
+  nomeFantasia  String?
+  contribuinte  String?
+  inscricaoEstadual String?
+  ufInscricaoEstadual String?
+
+  email     String?
+  phone     String?
+
+  cep          String?
+  logradouro   String?
+  numero       String?
+  complemento  String?
+  bairro       String?
+  cidade       String?
+  uf           String?
+  relacoesComerciais String[] @default(["CLIENTE"])
+  createdAt DateTime @default(now())
+
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  matters Matter[]
+  financeEntries FinanceEntry[]
+  financeRecurrenceTemplates FinanceRecurrenceTemplate[]
+
+  @@index([tenantId])
+  @@unique([tenantId, code])
+  @@unique([tenantId, cpf])
+  @@unique([tenantId, cnpj])
+}
+
+model Matter {
+  id         String   @id @default(uuid())
+  code       Int
+  tenantId   String
+  clientId   String?
+  title      String
+  area       String?
+  subject    String?
+  court      String?
+  caseNumber String?
+  status     String   @default("OPEN")
+  createdAt  DateTime @default(now())
+
+  tenant Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  client Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  members   MatterMember[]
+  tasks     Task[]
+  deadlines Deadline[]
+  documents Document[]
+  auditLogs AuditLog[]
+  financeEntries FinanceEntry[]
+  financeRecurrenceTemplates FinanceRecurrenceTemplate[]
+
+  @@index([tenantId])
+  @@unique([tenantId, code])
+  @@index([clientId])
+}
+
+model TenantCodeCounter {
+  id        String   @id @default(uuid())
+  tenantId  String
+  scope     String
+  value     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, scope])
+  @@index([tenantId])
+}
+
+model TenantAccessGroup {
+  id          String   @id @default(uuid())
+  code        Int
+  tenantId    String
+  key         String?
+  name        String
+  isSystem    Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  permissions String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([tenantId, code])
+  @@unique([tenantId, key])
+  @@index([tenantId])
+}
+
+model MatterMember {
+  id         String   @id @default(uuid())
+  tenantId   String
+  matterId   String
+  userId     String
+  memberRole String
+  createdAt  DateTime @default(now())
+
+  matter Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([matterId, userId])
+  @@index([tenantId])
+  @@index([matterId])
+  @@index([userId])
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  tenantId    String
+  matterId    String?
+  title       String
+  description String?
+  status      String   @default("OPEN")
+  priority    String   @default("MEDIUM")
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+
+  createdByUserId  String
+  assignedToUserId String?
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  matter Matter? @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  createdBy  User  @relation("TaskCreatedBy", fields: [createdByUserId], references: [id], onDelete: Cascade)
+  assignedTo User? @relation("TaskAssignedTo", fields: [assignedToUserId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([matterId])
+  @@index([assignedToUserId])
+}
+
+model Deadline {
+  id        String   @id @default(uuid())
+  tenantId  String
+  matterId  String
+  title     String
+  type      String   @default("GENERIC")
+  dueDate   DateTime
+  notes     String?
+  isDone    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  matter Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([matterId])
+  @@index([dueDate])
+}
+
+model Document {
+  id               String   @id @default(uuid())
+  tenantId         String
+  matterId         String
+  uploadedByUserId String
+
+  originalName   String
+  mimeType       String
+  sizeBytes      Int
+  storagePath    String
+  checksumSha256 String?
+  folder         String   @default("Geral")
+  tags           String[] @default([])
+  createdAt      DateTime @default(now())
+
+  tenant     Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  matter     Matter @relation(fields: [matterId], references: [id], onDelete: Cascade)
+  uploadedBy User   @relation(fields: [uploadedByUserId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([matterId])
+  @@index([uploadedByUserId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  tenantId  String
+  matterId  String?
+  userId    String?
+  action    String
+  metaJson  String?
+  prevHash  String?
+  hash      String?
+  createdAt DateTime @default(now())
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  matter Matter? @relation(fields: [matterId], references: [id], onDelete: SetNull)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId])
+  @@index([matterId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([tenantId, hash])
+}
+
+model AuthSession {
+  id         String   @id @default(uuid())
+  userId     String
+  tenantId   String
+  role       String
+  deviceKey  String?
+  ip         String?
+  userAgent  String?
+  issuedAt   DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  revokeReason String?
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+  @@index([userId, deviceKey, revokedAt])
+  @@index([tenantId, revokedAt])
+  @@index([expiresAt])
+}
+
+model HolidayCache {
+  id         String   @id @default(uuid())
+  cacheKey   String   @unique
+  year       Int
+  country    String   @default("BR")
+  uf         String?
+  city       String?
+  payloadJson String
+  source     String
+  fetchedAt  DateTime @default(now())
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([year, uf, city])
+}
+
+

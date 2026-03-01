@@ -1,0 +1,35 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.button {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--accent-2) 24%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface-muted));
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.error {
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  font-size: 12px;
+}

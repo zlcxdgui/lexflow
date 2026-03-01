@@ -1,0 +1,465 @@
+.page {
+  min-width: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.headerTitleBlock {
+  flex: 1 1 auto;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.backLink {
+  color: var(--muted);
+  text-decoration: none;
+  margin-top: 12px;
+  transition: color 140ms ease;
+}
+
+.backLink:hover {
+  color: var(--text);
+}
+
+.filtersCard {
+  padding: 14px;
+  background:
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--accent-2) 6%, transparent), transparent 44%),
+    var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: 16px;
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.filtersCard:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+  transform: translateY(-1px);
+}
+
+.filtersGrid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(220px, 1fr) 200px 220px 150px 150px auto;
+  align-items: end;
+}
+
+.auditFiltersPanel {
+  display: grid;
+  gap: 12px;
+}
+
+.auditTabsWrap {
+  display: grid;
+  gap: 8px;
+}
+
+.auditTabsLabel {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.auditTabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.auditTab {
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  background: var(--ui-surface-muted);
+  color: var(--muted);
+  padding: 8px 12px;
+  min-height: 34px;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    color 140ms ease,
+    transform 140ms ease;
+}
+
+.auditTab:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.auditTabActive {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-muted));
+}
+
+.auditFiltersRow {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+}
+
+.auditFiltersSearch {
+  grid-column: 1 / -1;
+}
+
+.auditFiltersActions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  gap: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  padding: 10px 12px;
+  min-height: 42px;
+  line-height: 1.2;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.input:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+}
+
+.input:focus,
+.input:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent-2) 38%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 16%, transparent);
+}
+
+.submitBtn,
+.clearBtn,
+.pageBtn {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  background: var(--ui-surface);
+  color: var(--text);
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: none;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    transform 140ms ease;
+}
+
+.submitBtn:hover,
+.clearBtn:hover,
+.pageBtn:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 5%, var(--ui-surface));
+  transform: translateY(-1px);
+}
+
+.filtersFooter {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.counter {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.errorBox {
+  border: 1px solid color-mix(in srgb, #ef4444 38%, var(--ui-border));
+  color: color-mix(in srgb, #ef4444 72%, var(--text));
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: color-mix(in srgb, #ef4444 10%, var(--ui-surface-muted));
+}
+
+.list {
+  display: grid;
+  gap: 8px;
+}
+
+.listCard {
+  display: grid;
+  gap: 8px;
+}
+
+.item {
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease,
+    background-color 150ms ease;
+}
+
+.item:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 18%, var(--ui-border));
+  background: color-mix(in srgb, var(--ui-surface) 96%, rgba(89, 216, 255, 0.04));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.meta {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.detail {
+  margin-top: 6px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.link {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.link:hover {
+  color: color-mix(in srgb, var(--accent-2) 68%, var(--text));
+}
+
+.empty {
+  border: 1px dashed var(--ui-border);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--muted);
+  background: var(--ui-surface-muted);
+}
+
+.paginationRow {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border: 1px solid var(--ui-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.paginationRow:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 16%, var(--ui-border));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+.pageInfo {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.paginationControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.paginationControls .pageBtn {
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.paginationLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.paginationSelect {
+  border-radius: 10px;
+  padding: 6px 8px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+  min-height: 34px;
+  line-height: 1.2;
+  transition:
+    border-color 140ms ease,
+    background-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.paginationSelect:hover {
+  border-color: color-mix(in srgb, var(--accent-2) 20%, var(--ui-border));
+}
+
+.pageNumber {
+  color: var(--muted);
+  font-size: 12px;
+  min-width: 110px;
+  text-align: center;
+}
+
+.pageBtnDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .auditFiltersRow {
+    grid-template-columns: 1fr;
+  }
+
+  .auditTabs {
+    gap: 6px;
+  }
+
+  .auditTab {
+    font-size: 12px;
+    padding: 7px 10px;
+  }
+}
+
+@media (max-width: 680px) {
+  .title {
+    font-size: 30px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .auditFiltersRow {
+    grid-template-columns: 1fr;
+  }
+
+  .auditFiltersActions {
+    justify-content: stretch;
+    gap: 8px;
+  }
+
+  .auditFiltersActions .clearBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .auditFiltersActions .submitBtn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+:global(html[data-theme='light']) .item,
+:global(html[data-theme='light']) .paginationRow {
+  border-color: var(--ui-border);
+  background: var(--ui-surface);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+:global(html[data-theme='light']) .filtersCard:hover {
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+:global(html[data-theme='light']) .item:hover,
+:global(html[data-theme='light']) .paginationRow:hover {
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.06);
+}
+
+:global(html[data-theme='light']) .auditTab,
+:global(html[data-theme='light']) .submitBtn,
+:global(html[data-theme='light']) .clearBtn,
+:global(html[data-theme='light']) .pageBtn {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .auditTabActive {
+  border-color: color-mix(in srgb, var(--accent-2) 36%, var(--ui-border));
+  background: color-mix(in srgb, var(--accent-2) 10%, var(--ui-surface-inset));
+}
+
+:global(html[data-theme='light']) .input,
+:global(html[data-theme='light']) .paginationSelect {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+  color: var(--text);
+}
+
+:global(html[data-theme='light']) .input:focus {
+  border-color: color-mix(in srgb, var(--accent-2) 42%, var(--ui-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 12%, transparent);
+}
+
+:global(html[data-theme='light']) .errorBox {
+  border-color: rgba(210, 74, 74, 0.35);
+  background: rgba(210, 74, 74, 0.08);
+  color: #991b1b;
+}
+
+:global(html[data-theme='light']) .empty {
+  border-color: var(--ui-border);
+  background: var(--ui-surface-muted);
+}

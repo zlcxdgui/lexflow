@@ -180,3 +180,6 @@ Perfis:
 - Observabilidade básica:
   - `GET /metrics` (contadores e latência média por rota)
 - Política de ciclo de vida/retenção: `docs/tenant-lifecycle-policy.md`
+
+## Validação de fluxo
+- PR de validação do pipeline Quality Gate (sem impacto funcional).

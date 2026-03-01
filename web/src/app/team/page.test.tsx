@@ -373,7 +373,7 @@ describe('TeamPage integration with UISelect', () => {
 
     fireEvent.click(memberActionButtons[0]);
 
-    const alterLink = await screen.findByRole('link', { name: 'Alterar' });
+    const alterLink = await screen.findByRole('link', { name: /alterar/i });
     fireEvent.click(alterLink);
 
     await waitFor(() => {
@@ -445,14 +445,14 @@ describe('TeamPage integration with UISelect', () => {
     });
 
     fireEvent.click(screen.getAllByRole('button', { name: 'Ações do membro' })[0]);
-    fireEvent.click(await screen.findByRole('button', { name: 'Desativar' }));
+    fireEvent.click(await screen.findByRole('button', { name: /desativar/i }));
 
     await waitFor(() => {
       expect(screen.getByText('Desativar membro')).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: 'Desativar' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /desativar/i })).toBeInTheDocument();
     });
 
-    const confirmButtons = screen.getAllByRole('button', { name: 'Desativar' });
+    const confirmButtons = screen.getAllByRole('button', { name: /desativar/i });
     fireEvent.click(confirmButtons[confirmButtons.length - 1]);
 
     await waitFor(() => {
@@ -466,3 +466,7 @@ describe('TeamPage integration with UISelect', () => {
     expect(JSON.parse(String(patchCall?.[1]?.body))).toEqual({ isActive: false });
   });
 });
+
+
+
+
